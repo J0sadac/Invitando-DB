@@ -14,7 +14,12 @@ var router = require('./router/router');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-const white_list = ['http://localhost:3500', 'http://localhost:3000', 'https://invitandoo.com'];
+const white_list = [
+    'http://localhost:3500', 
+    'http://localhost:3000', 
+    'https://invitandoo.com',
+    'http://192.168.100.85:3000'
+];
 
 app.use(cors({
     origin: white_list
