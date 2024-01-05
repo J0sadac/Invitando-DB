@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
@@ -12,6 +13,12 @@ var router = require('./router/router');
 //middleware
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+const white_list = ['http://localhost:3500', 'http://localhost:3000', 'https://invitandoo.com'];
+
+app.use(cors({
+    origin: white_list
+}));
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, 'public/uploads'),
