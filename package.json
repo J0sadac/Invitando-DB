@@ -4,7 +4,8 @@
   "description": "Esta es la base de datos de Invitandoo.com, la cual gestionara tanto eventos como invitados.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Josadac Castañeda",
   "license": "ISC",
