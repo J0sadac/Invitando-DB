@@ -7,7 +7,6 @@ var EventoSchema = Schema({
     evento: {
         type: String,
         required: false
-        //temporal
     },
     datos: {
         festejado: {
@@ -69,7 +68,7 @@ var EventoSchema = Schema({
     },
     multimedia: {
         carousel: [{
-            imageURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -79,7 +78,7 @@ var EventoSchema = Schema({
             }
         }],
         galeria: [{
-            imageURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -89,7 +88,7 @@ var EventoSchema = Schema({
             }
         }],
         fondo: {
-            imageURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -99,7 +98,7 @@ var EventoSchema = Schema({
             }
         },
         cancion: {
-            audioURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -109,11 +108,17 @@ var EventoSchema = Schema({
             }
         },
         videos: {
-            type: String,
-            require: false
+            url: {
+                type: String,
+                require: false
+            },
+            public_id: {
+                type: String,
+                require: false
+            }
         },
         portada: [{
-            imageURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -123,7 +128,7 @@ var EventoSchema = Schema({
             }
         }],
         flor: {
-            imageURL: {
+            url: {
                 type: String,
                 require: false
             },
@@ -195,31 +200,26 @@ var EventoSchema = Schema({
         mesa: {
             type: Number,
             required: false
-            //temporal
         },
         invitado: {
             type: String,
             required: false
-            //temporal
         },
         pase: {
             type: Number,
             required: false
-            //temporal
         },
-        niños: {
+        infantes: {
             type: Number,
             required: false
         },
         telefono: [{
             type: String,
             required: false
-            //temporal
         }],
         asistir: {
             type: String,
             required: false
-            //temporal
         }
     }]
 });

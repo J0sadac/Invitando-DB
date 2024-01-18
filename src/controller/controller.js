@@ -34,7 +34,7 @@ var Controller = {
         try{
             const evento = await Evento.findById(eventoId).exec();
 
-            return res.status(200).send({evento});
+            return res.status(200).send(evento);
         }catch(err){
             return res.status(500).send({
                 message: "No se obtuvo ningun evento"
@@ -42,15 +42,40 @@ var Controller = {
         }
     },
     nuevoEvento : async function(req, res){
-        var evento = new Evento();
-        var params = req.body
+        const Datos= req.body;
 
-        evento.evento = params.evento
+        const eventoNuevo = new Evento({
+            evento: Datos.evento,
+            datos: {
+                festejado: Datos.festejado,
+                novios: {
+                    novio: Datos.novio,
+                    novia: Datos.novia
+                },
+                padres: {
+                    papa: Datos.papa,
+                    mama: Datos.mama
+                },
+                fecha: Datos.fecha,
+                lugar: {
+                    salon: Datos.salon,
+                    direccion: Datos.direccion,
+                    ciudad: Datos.ciudad
+                },
+                padrinos: [{
+                    padrino: Datos.padrino,
+                    de: Datos.de
+                }]
+            }
+        });
 
         try{
-            const guardarEvento = await evento.save();
-            return res.status(200).send({guardarEvento});
+            const datosEvento = await eventoNuevo.save();
+
+            return res.status(200).send({datosEvento});
         }catch(err){
+            console.log(err);
+
             return res.status(500).send({
                 message: "No se creo un nuevo evento"
             });
@@ -87,11 +112,21 @@ var Controller = {
     },
     nuevoInvitado: async function(req, res){
         var eventoId = req.params.id;
-        var nuevoInvitado = req.body
+        var datos = req.body
 
         try{
             const evento = await Evento.findById(eventoId);
-            evento.invitados.push(nuevoInvitado);
+
+            const invitado ={
+                mesa: datos.mesa,
+                invitado: datos.invitado,
+                pase: datos.pase,
+                infantes: datos.infantes,
+                telefono: datos.telefono,
+                asistir: datos.asistir
+            }
+
+            evento.invitados.push(invitado);
             await evento.save();
     
             return res.status(200).send({evento});
@@ -113,7 +148,12 @@ var Controller = {
             Object.assign(invitado, actualizacion);
             await evento.save();
 
-            return res.status(200).send({evento});
+            const invitacion = {
+                ...evento.toObject(),
+                invitados:invitado
+            }
+
+            return res.status(200).send({invitacion});
         }catch(err){
             return res.status(500).send({
                 message: "No poudimos actualizar el invitado"
@@ -183,7 +223,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             const imagen = {
-                imageURL: imagenCloud.secure_url,
+                url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
 
@@ -229,7 +269,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             const imagen = {
-                imageURL: imagenCloud.secure_url,
+                url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
 
@@ -255,7 +295,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             evento.multimedia.fondo = {
-                imageURL: imagenCloud.secure_url,
+                url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
 
@@ -279,7 +319,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             const imagen = {
-                imageURL: imagenCloud.secure_url,
+                url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
 
@@ -306,7 +346,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             evento.multimedia.flor = {
-                imageURL: imagenCloud.secure_url,
+                url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
 
@@ -330,7 +370,7 @@ var Controller = {
             const evento = await Evento.findById(eventoId);
 
             evento.multimedia.cancion = {
-                audioURL: audioCloud.secure_url,
+                url: audioCloud.secure_url,
                 public_id: audioCloud.public_id
             };
 
