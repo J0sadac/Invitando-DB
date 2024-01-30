@@ -21,7 +21,7 @@ var Controller = {
         try{
             const eventos = await Evento.find({}).exec();
 
-            return res.status(200).send({eventos});
+            return res.status(200).send(eventos);
         }catch(err){
             return res.status(500).send({
                 message: "No se pudieron obtener los datos"
