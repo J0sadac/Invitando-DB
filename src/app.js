@@ -18,7 +18,8 @@ const white_list = [
     'http://localhost:3500', 
     'http://localhost:3000', 
     'https://invitandoo.com',
-    'http://192.168.100.85:3000'
+    'http://192.168.100.85:3000',
+    'http://192.168.100.87:3000'
 ];
 
 app.use(cors({
