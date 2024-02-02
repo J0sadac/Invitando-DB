@@ -172,6 +172,27 @@ var Controller = {
             })
         }
     },
+    invitacion: async function(req, res){
+        const eventoId = req.params.eventoId;
+
+        try{
+            const evento = await Evento.findById(eventoId).exec();
+            const invitado = evento.invitados[0];
+
+            const invitacion ={
+                ...evento.toObject(),
+                invitados: [invitado]
+            }
+
+            return res.status(200).send({invitacion});
+        }catch(err){
+            console.log(err);
+
+            return res.status(500).send({
+                message: "No se pudo obtener la invitacion"
+            });
+        };
+    },
     nuevoItinerario: async function(req, res){
         var eventoId = req.params.id;
         var itinerario = req.body;
