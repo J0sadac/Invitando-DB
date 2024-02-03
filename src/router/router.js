@@ -22,6 +22,7 @@ router.post('/evento/:id/galeria', EventoController.nuevaImagenGaleria);
 router.post('/evento/:id/mesa', EventoController.nuevaMesa);
 router.post('/evento/:id/fondo', EventoController.nuevoFondo);
 router.post('/evento/:id/portada', EventoController.nuevaPortada);
+router.post('/evento/:id/preportada', EventoController.nuevaPrePortada);
 router.post('/evento/:id/flor', EventoController.nuevaImagenFlor);
 router.post('/evento/:id/cancion', EventoController.nuevaCancion);
 

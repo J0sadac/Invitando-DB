@@ -127,6 +127,16 @@ var EventoSchema = Schema({
                 require: false
             }
         }],
+        preportada: [{
+            url: {
+                type: String,
+                require: false
+            },
+            public_id: {
+                type: String,
+                require: false
+            }
+        }],
         flor: {
             url: {
                 type: String,

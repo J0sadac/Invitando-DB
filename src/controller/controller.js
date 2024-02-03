@@ -350,6 +350,33 @@ var Controller = {
             })
         }
     },
+    nuevaPrePortada: async function(req, res){
+        const eventoId = req.params.id;
+        
+        try{
+            const imagenCloud = await Cloud.uploader.upload(req.file.path);
+            
+            const evento = await Evento.findById(eventoId);
+
+            const imagen = {
+                url: imagenCloud.secure_url,
+                public_id: imagenCloud.public_id
+            };
+
+            evento.multimedia.preportada.push(imagen);
+
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send(evento);
+        }catch(err){
+            console.log(err);
+            res.status(500).send({
+                meesage: "No se a subido la imagen"
+            })
+        }
+    },
     nuevaImagenFlor: async function(req, res){
         const eventoId = req.params.id;
         
