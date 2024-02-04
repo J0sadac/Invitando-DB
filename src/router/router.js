@@ -25,5 +25,6 @@ router.post('/evento/:id/portada', EventoController.nuevaPortada);
 router.post('/evento/:id/preportada', EventoController.nuevaPrePortada);
 router.post('/evento/:id/flor', EventoController.nuevaImagenFlor);
 router.post('/evento/:id/cancion', EventoController.nuevaCancion);
+router.post('/evento/:id/padres', EventoController.nuevosPadres);
 
 module.exports = router;

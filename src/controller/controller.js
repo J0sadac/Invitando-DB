@@ -221,6 +221,30 @@ var Controller = {
             })
         }
     },
+    nuevosPadres: async function(req, res){
+        var eventoId = req.params.id;
+        var padres = req.body;
+
+        try{ 
+            const evento = await Evento.findById(eventoId);
+
+            const nuevosPapas = {
+                papa: padres.papa,
+                mama: padres.mama
+            };
+
+            evento.datos.padres.push(nuevosPapas);
+
+            await evento.save();
+
+            return res.status(200).send({evento})
+        }catch(err){
+            console.log(err)
+            return res.status(500).send({
+                message: "no fue posible guardar el itinerario"
+            })
+        }
+    },
     editarItinerario: async function(req, res){
 
     },
