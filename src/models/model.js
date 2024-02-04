@@ -23,7 +23,7 @@ var EventoSchema = Schema({
                 required: false
             }
         },
-        padres: {
+        padres: [{
             papa: {
                 type: String,
                 required: false
@@ -32,7 +32,7 @@ var EventoSchema = Schema({
                 type: String,
                 required: false
             }
-        },
+        }],
         fecha: {
             type: String,
             required: false
