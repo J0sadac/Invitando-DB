@@ -197,6 +197,14 @@ var EventoSchema = Schema({
         }
     }],
     vestimenta: {
+        iconoHombre: {
+            type: String,
+            required: false
+        },
+        iconoMujer: {
+            type: String,
+            required: false
+        },
         hombre: {
             type: String,
             required: false

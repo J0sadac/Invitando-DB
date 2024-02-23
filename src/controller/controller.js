@@ -221,6 +221,33 @@ var Controller = {
             })
         }
     },
+    nuevoVestimenta: async function(req, res){
+        var eventoId = req.params.id;
+        var vestimenta = req.body;
+
+        try{
+            const iconoCloud = await Cloud.uploader.upload(req.file.path); 
+            const evento = await Evento.findById(eventoId);
+
+            const nuevaVestimenta = {
+                iconoHombre: iconoCloud.secure_url,
+                iconoMujer: iconoCloud.secure_url,
+                hombre: vestimenta.hombre,
+                mujer: vestimenta.mujer
+            };
+
+            evento.vestiemnta.push(nuevaVestimenta);
+
+            await evento.save();
+            await fs.unlink(req.file.path);
+
+            return res.status(200).send({evento})
+        }catch(err){
+            return res.status(500).send({
+                message: "no fue posible guardar el itinerario"
+            })
+        }
+    },
     nuevosPadres: async function(req, res){
         var eventoId = req.params.id;
         var padres = req.body;
