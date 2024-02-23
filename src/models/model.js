@@ -8,6 +8,10 @@ var EventoSchema = Schema({
         type: String,
         required: false
     },
+    modelo: {
+        type: Number,
+        required: false
+    },
     datos: {
         festejado: {
             type: String,
