@@ -14,6 +14,7 @@ router.delete('/evento/:id', EventoController.eliminarEvento);
 router.post('/evento/:id/invitado', EventoController.nuevoInvitado);
 router.get('/evento/:eventoId/invitado/:invitadoId', EventoController.invitado);
 router.put('/evento/:eventoId/invitado/:invitadoId/editar', EventoController.editarInvitado);
+router.delete('/evento/:eventoId/invitado/:invitadoId', EventoController.eliminarInvitado);
 router.get('/mi-evento/:eventoId', EventoController.invitacion);
 router.post('/evento/:id/itinerario', EventoController.nuevoItinerario);
 router.post('/evento/:id/vestimenta', EventoController.nuevoVestimenta);

@@ -152,6 +152,28 @@ var Controller = {
             });
         }
     },
+    eliminarInvitado: async function(req, res){
+        const eventoId = req.params.eventoId;
+        const invitadoId = req.params.invitadoId;
+
+        try{
+            const evento = await Evento.findById(eventoId).exec();
+            const invitado = evento.invitados.find(invitado => invitado._id == invitadoId);
+
+            console.log(invitado)
+
+            evento.invitados.pull(invitado);
+
+            await evento.save();            
+
+            res.status(200).send({evento})
+        }catch(err){
+            console.log(err)
+            res.status(500).send({
+                message: "Hubo un error al eliminar el evento"
+            })
+        }
+    },
     invitado: async function(req, res){
         var eventoId= req.params.eventoId;
         var invitadoId = req.params.invitadoId;

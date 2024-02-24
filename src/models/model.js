@@ -242,6 +242,10 @@ var EventoSchema = Schema({
         asistir: {
             type: String,
             required: false
+        },
+        de: {
+            type: String,
+            required: false
         }
     }]
 });
