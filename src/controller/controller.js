@@ -115,7 +115,8 @@ var Controller = {
                 pase: datos.pase,
                 infantes: datos.infantes,
                 telefono: datos.telefono,
-                asistir: datos.asistir
+                asistir: datos.asistir,
+                de: datos.de
             }
 
             evento.invitados.push(invitado);
