@@ -72,6 +72,16 @@ var EventoSchema = Schema({
         dia: {
             type: String,
             require: false
+        }, 
+        contacto:{
+            nombre: {
+                type: String,
+                require: false
+            },
+            telefono: {
+                type: String,
+                require: false
+            }
         }
     },
     multimedia: {
