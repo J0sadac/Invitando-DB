@@ -68,7 +68,11 @@ var EventoSchema = Schema({
                 type: String,
                 required: false
             }
-        }]
+        }],
+        dia: {
+            type: String,
+            require: false
+        }
     },
     multimedia: {
         carousel: [{
