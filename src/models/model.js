@@ -263,15 +263,13 @@ var EventoSchema = Schema({
         }
     }],
     estilos:{
-        portada: {
-            tituloPortada:{
-                type: String,
-                required: false
-            },
-            contenidoPortada:{
-                type: String,
-                required: false
-            }
+        tituloPortada:{
+            type: String,
+            required: false
+        },
+        contenidoPortada:{
+            type: String,
+            required: false
         }
     }
 });
