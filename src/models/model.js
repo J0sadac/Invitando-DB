@@ -261,7 +261,13 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    }]
+    }],
+    estilos:{
+        portada:{
+            type: String,
+            required: false
+        }
+    }
 });
 
 module.exports = mongoose.model('eventos', EventoSchema);
