@@ -246,15 +246,15 @@ var Controller = {
     },
     nuevoPadrino: async function(req, res){
         var eventoId = req.params.id;
-        var padrino = req.body;
+        var padrinos = req.body;
 
         try{
             const iconoCloud = await Cloud.uploader.upload(req.file.path); 
             const evento = await Evento.findById(eventoId);
 
             const nuevoPadrino = {
-                de: datos.padrinos.de,
-                padrino : datos.padrinos.padrino,
+                de: padrinos.de,
+                padrino : padrinos.padrino,
                 icono: iconoCloud.secure_url,
             };
 

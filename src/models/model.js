@@ -67,10 +67,6 @@ var EventoSchema = Schema({
             de: {
                 type: String,
                 required: false
-            },
-            icono: {
-                type: String,
-                required: false
             }
         }],
         dia: {
@@ -88,6 +84,20 @@ var EventoSchema = Schema({
             }
         }
     },
+    padrinos: [{
+        padrino: [{
+            type: String,
+            required: false
+        }],
+        de: {
+            type: String,
+            required: false
+        },
+        icono : {
+            type: String,
+            required: false
+        }
+    }],
     multimedia: {
         carousel: [{
             url: {
