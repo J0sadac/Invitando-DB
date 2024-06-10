@@ -244,6 +244,32 @@ var Controller = {
             })
         }
     },
+    nuevoPadrino: async function(req, res){
+        var eventoId = req.params.id;
+        var padrino = req.body;
+
+        try{
+            const iconoCloud = await Cloud.uploader.upload(req.file.path); 
+            const evento = await Evento.findById(eventoId);
+
+            const nuevoPadrino = {
+                de: datos.padrinos.de,
+                padrino : datos.padrinos.padrino,
+                icono: iconoCloud.secure_url,
+            };
+
+            evento.datos.padrinos.push(nuevoPadrino);
+
+            await evento.save();
+            await fs.unlink(req.file.path);
+
+            return res.status(200).send({evento})
+        }catch(err){
+            return res.status(500).send({
+                message: "no fue posible guardar el padrino"
+            })
+        }
+    },
     nuevoVestimenta: async function(req, res){
         var eventoId = req.params.id;
         var vestimenta = req.body;

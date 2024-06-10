@@ -67,6 +67,10 @@ var EventoSchema = Schema({
             de: {
                 type: String,
                 required: false
+            },
+            icono: {
+                type: String,
+                required: false
             }
         }],
         dia: {
