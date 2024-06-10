@@ -258,7 +258,7 @@ var Controller = {
                 icono: iconoCloud.secure_url,
             };
 
-            evento.datos.padrinos.push(nuevoPadrino);
+            evento.padrinos.push(nuevoPadrino);
 
             await evento.save();
             await fs.unlink(req.file.path);
