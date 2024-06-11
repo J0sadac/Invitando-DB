@@ -130,7 +130,7 @@ var EventoSchema = Schema({
             }
         },
         fondos: {
-            primero: [{
+            primero: {
                 url: {
                     type: String,
                     require: false
@@ -139,8 +139,8 @@ var EventoSchema = Schema({
                     type: String,
                     require: false
                 }
-            }],
-            segundo: [{
+            },
+            segundo: {
                 url: {
                     type: String,
                     require: false
@@ -149,8 +149,8 @@ var EventoSchema = Schema({
                     type: String,
                     require: false
                 }
-            }],
-            tercero:[{
+            },
+            tercero:{
                 url: {
                     type: String,
                     require: false
@@ -159,7 +159,7 @@ var EventoSchema = Schema({
                     type: String,
                     require: false
                 }
-            }]
+            }
         },
         cancion: {
             url: {

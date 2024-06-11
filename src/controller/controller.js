@@ -407,12 +407,10 @@ var Controller = {
             
             const evento = await Evento.findById(eventoId);
 
-            const imagen = {
+            evento.multimedia.fondos.primero = {
                 url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
-
-            evento.multimedia.fondos.primero.push(imagen);
 
             await evento.save();
 
@@ -433,12 +431,10 @@ var Controller = {
             
             const evento = await Evento.findById(eventoId);
 
-            const imagen = {
+            evento.multimedia.fondos.segundo = {
                 url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
-
-            evento.multimedia.fondos.segundo.push(imagen);
 
             await evento.save();
 
@@ -459,12 +455,10 @@ var Controller = {
             
             const evento = await Evento.findById(eventoId);
 
-            const imagen = {
+            evento.multimedia.fondos.tercero = {
                 url: imagenCloud.secure_url,
                 public_id: imagenCloud.public_id
             };
-
-            evento.multimedia.fondos.tercero.push(imagen);
 
             await evento.save();
 
