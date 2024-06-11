@@ -284,7 +284,15 @@ var EventoSchema = Schema({
         contenidoPortada:{
             type: String,
             required: false
-        }
+        },
+        alineamientoMensaje:{
+            type: String,
+            required: false
+        },
+        letraMensaje:{
+            type: String,
+            required: false
+        },
     }
 });
 
