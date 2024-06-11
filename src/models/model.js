@@ -129,6 +129,38 @@ var EventoSchema = Schema({
                 require: false
             }
         },
+        fondos: {
+            primero: {
+                url: {
+                    type: String,
+                    require: false
+                },
+                public_id: {
+                    type: String,
+                    require: false
+                }
+            },
+            segundo: {
+                url: {
+                    type: String,
+                    require: false
+                },
+                public_id: {
+                    type: String,
+                    require: false
+                }
+            },
+            tercero:{
+                url: {
+                    type: String,
+                    require: false
+                },
+                public_id: {
+                    type: String,
+                    require: false
+                }
+            }
+        },
         cancion: {
             url: {
                 type: String,
