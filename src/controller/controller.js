@@ -467,7 +467,8 @@ var Controller = {
             res.status(200).send({evento});
         }catch(err){
             res.status(500).send({
-                meesage: "No se a subido la imagen"
+                meesage: "No se a subido la imagen",
+                error: err
             })
         }
     },
