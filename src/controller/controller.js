@@ -399,6 +399,84 @@ var Controller = {
             })
         }
     },
+    nuevoFondoPrimero: async function(req, res){
+        const eventoId = req.params.id;
+        
+        try{
+            const imagenCloud = await Cloud.uploader.upload(req.file.path);
+            
+            const evento = await Evento.findById(eventoId);
+
+            const imagen = {
+                url: imagenCloud.secure_url,
+                public_id: imagenCloud.public_id
+            };
+
+            evento.multimedia.fondos.primero.push(imagen);
+
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send({evento});
+        }catch(err){
+            res.status(500).send({
+                meesage: "No se a subido la imagen"
+            })
+        }
+    },
+    nuevoFondoSegundo: async function(req, res){
+        const eventoId = req.params.id;
+        
+        try{
+            const imagenCloud = await Cloud.uploader.upload(req.file.path);
+            
+            const evento = await Evento.findById(eventoId);
+
+            const imagen = {
+                url: imagenCloud.secure_url,
+                public_id: imagenCloud.public_id
+            };
+
+            evento.multimedia.fondos.segundo.push(imagen);
+
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send({evento});
+        }catch(err){
+            res.status(500).send({
+                meesage: "No se a subido la imagen"
+            })
+        }
+    },
+    nuevoFondoTercero: async function(req, res){
+        const eventoId = req.params.id;
+        
+        try{
+            const imagenCloud = await Cloud.uploader.upload(req.file.path);
+            
+            const evento = await Evento.findById(eventoId);
+
+            const imagen = {
+                url: imagenCloud.secure_url,
+                public_id: imagenCloud.public_id
+            };
+
+            evento.multimedia.fondos.tercero.push(imagen);
+
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send({evento});
+        }catch(err){
+            res.status(500).send({
+                meesage: "No se a subido la imagen"
+            })
+        }
+    },
     nuevoFondo: async function(req, res){
         const eventoId = req.params.id;
         
