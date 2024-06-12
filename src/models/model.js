@@ -328,6 +328,10 @@ var EventoSchema = Schema({
         letraPase:{
             type: String,
             required: false
+        },
+        colorPadit:{
+            type: String,
+            required: false
         }
     },
     mensajeUno:{
