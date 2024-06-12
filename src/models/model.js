@@ -332,6 +332,14 @@ var EventoSchema = Schema({
         colorPadit:{
             type: String,
             required: false
+        },
+        colorPadres:{
+            type: String,
+            required: false
+        },
+        colorConfirmacion: {
+            type: String,
+            required: false
         }
     },
     mensajeUno:{
