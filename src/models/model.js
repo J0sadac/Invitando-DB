@@ -325,6 +325,44 @@ var EventoSchema = Schema({
             type: String,
             required: false
         },
+        letraPase:{
+            type: String,
+            required: false
+        }
+    },
+    mensajeUno:{
+        icono:{
+            url: {
+                type: String,
+                require: false
+            },
+            public_id: {
+                type: String,
+                require: false
+            }  
+        },
+        adorno:{
+            url: {
+                type: String,
+                require: false
+            },
+            public_id: {
+                type: String,
+                require: false
+            }
+        },
+        mensaje:{
+            type: String,
+            require: false
+        },
+        alineamiento:{
+            type: String,
+            require: false 
+        },
+        color:{
+            type: String,
+            require: false
+        }
     }
 });
 

@@ -626,6 +626,34 @@ var Controller = {
                 message: "No se pudo agregar la mesa de regalos"
             })
         }
+    },
+    nuevoMensajeUno: async function(req, res){
+        var eventoId = req.params.id;
+        var mensaje = req.body;
+
+        try{
+            const iconoCloud = await Cloud.uploader.upload(req.file.path); 
+            const evento = await Evento.findById(eventoId);
+
+            const nuevoMensaje = {
+                accion: itinerario.accion,
+                ubicacion : itinerario.ubicacion,
+                icono: iconoCloud.secure_url,
+                hora: itinerario.hora,
+                direccion: itinerario.direccion
+            };
+
+            evento.itinerario.push(nuevoItinerario);
+
+            await evento.save();
+            await fs.unlink(req.file.path);
+
+            return res.status(200).send({evento})
+        }catch(err){
+            return res.status(500).send({
+                message: "no fue posible guardar el itinerario"
+            })
+        }
     }
     
 };
