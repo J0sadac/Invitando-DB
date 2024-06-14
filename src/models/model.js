@@ -340,6 +340,10 @@ var EventoSchema = Schema({
         colorConfirmacion: {
             type: String,
             required: false
+        },
+        modo: {
+            type: String,
+            required: false
         }
     },
     mensajeUno:{
