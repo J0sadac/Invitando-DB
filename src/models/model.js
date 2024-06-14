@@ -329,6 +329,10 @@ var EventoSchema = Schema({
             type: String,
             required: false
         },
+        letraUbicacion:{
+            type: String,
+            required: false
+        },
         colorPadit:{
             type: String,
             required: false
