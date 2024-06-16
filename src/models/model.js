@@ -383,6 +383,12 @@ var EventoSchema = Schema({
             type: String,
             require: false
         }
+    },
+    confirmaciones:{
+        mensajeUno:{
+            type: String,
+            required: false
+        }
     }
 });
 
