@@ -386,7 +386,7 @@ var EventoSchema = Schema({
     },
     confirmaciones:{
         mensajeUno:{
-            type: String,
+            type: Boolean,
             required: false
         }
     }
