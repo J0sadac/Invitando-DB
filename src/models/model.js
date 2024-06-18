@@ -274,10 +274,28 @@ var EventoSchema = Schema({
             required: false
         }
     },
-    ubicacion: {
-        type: String,
-        required: false
-    },
+    ubicacion: [{
+        salon: {
+            type: String,
+            required: false
+        },
+        foto: {
+            type: String,
+            required: false
+        },
+        direccion: {
+            type: String,
+            required: false
+        },
+        ciudad: {
+            type: String,
+            required: false
+        },
+        link: {
+            type: String,
+            required: false
+        }
+    }],
     invitados: [{
         mesa: {
             type: Number,

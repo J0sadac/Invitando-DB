@@ -654,6 +654,35 @@ var Controller = {
                 message: "no fue posible guardar el itinerario"
             })
         }
+    },
+    nuevaUbicacion: async function(req, res){
+        const eventoId = req.params.id;
+        const ubicacion = req.body;
+
+        try{
+            const iconCloud = await Cloud.uploader.upload(req.file.path);
+            const evento = await Evento.findById(eventoId);
+
+            const nuevaUbi = {
+                salon: ubicacion.salon,
+                foto: iconCloud.secure_url,
+                direccion: ubicacion.direccion,
+                ciudad: ubicacion.ciudad,
+                link: ubicacion.link
+            }
+
+            evento.mesaDeRegalos.push(nuevaUbi);
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send({evento});
+        }catch(err){
+            console.log(err);
+            res.status(500).send({
+                message: "No se pudo agregar la mesa de regalos"
+            })
+        }
     }
     
 };
