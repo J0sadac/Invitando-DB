@@ -671,7 +671,7 @@ var Controller = {
                 link: ubicacion.link
             }
 
-            evento.mesaDeRegalos.push(nuevaUbi);
+            evento.ubicacion.push(nuevaUbi);
             await evento.save();
 
             await fs.unlink(req.file.path);
