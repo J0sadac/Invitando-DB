@@ -406,6 +406,10 @@ var EventoSchema = Schema({
         mensajeUno:{
             type: Boolean,
             required: false
+        },
+        frases:{
+            type: Boolean,
+            required: false
         }
     }
 });
