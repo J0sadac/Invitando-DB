@@ -366,6 +366,14 @@ var EventoSchema = Schema({
         modo: {
             type: String,
             required: false
+        },
+        contenidoPadres: {
+            type: String,
+            required: false
+        },
+        letrasVestimenta: {
+            type: String,
+            required: false
         }
     },
     mensajeUno:{
