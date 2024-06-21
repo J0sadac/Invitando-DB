@@ -374,6 +374,16 @@ var EventoSchema = Schema({
         letrasVestimenta: {
             type: String,
             required: false
+        },
+        estilosGaleria:{
+            fondo:{
+                type: String,
+                required: false
+            },
+            color:{
+                type: String,
+                required: false
+            }
         }
     },
     mensajeUno:{
