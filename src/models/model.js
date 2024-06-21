@@ -438,6 +438,10 @@ var EventoSchema = Schema({
         frases:{
             type: Boolean,
             required: false
+        },
+        condiciones:{
+            type: Boolean,
+            required: false
         }
     }
 });
