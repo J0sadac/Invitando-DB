@@ -708,6 +708,31 @@ var Controller = {
                 message: "No se pudo agregar la mesa de regalos"
             })
         }
+    },
+    nuevosEstilosInvitacion: async function(req, res){
+        const eventoId = req.params.id;
+        const estilos = req.body;
+
+        try{
+            const iconCloud = await Cloud.uploader.upload(req.file.path);
+            const evento = await Evento.findById(eventoId);
+
+            evento.estilos.estilosInvitacion = {
+                fondo: iconCloud.secure_url,
+                color: estilos.color
+            }
+
+            await evento.save();
+
+            await fs.unlink(req.file.path);
+
+            res.status(200).send({evento});
+        }catch(err){
+            console.log(err);
+            res.status(500).send({
+                message: "No se pudo agregar la mesa de regalos"
+            })
+        }
     }
     
 };
