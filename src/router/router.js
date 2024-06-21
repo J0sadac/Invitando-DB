@@ -34,5 +34,6 @@ router.post('/evento/:id/flor', EventoController.nuevaImagenFlor);
 router.post('/evento/:id/cancion', EventoController.nuevaCancion);
 router.post('/evento/:id/padres', EventoController.nuevosPadres);
 router.post('/evento/:id/estilos/galeria', EventoController.nuevosEstilosGaleria);
+router.post('/evento/:id/estilos/invitacion', EventoController.nuevosEstilosInvitacion);
 
 module.exports = router;
