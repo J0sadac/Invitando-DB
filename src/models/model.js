@@ -439,6 +439,10 @@ var EventoSchema = Schema({
             type: Boolean,
             required: false
         },
+        lluvia:{
+            type: Boolean,
+            required: false
+        },
         condiciones:{
             type: Boolean,
             required: false
