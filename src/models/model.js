@@ -228,6 +228,14 @@ var EventoSchema = Schema({
         codigo: {
             type: String,
             require: false
+        },
+        tarjeta: {
+            type: String,
+            require: false
+        },
+        banco: {
+            type: String,
+            require: false
         }
     }],
     frases: [{

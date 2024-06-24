@@ -611,7 +611,9 @@ var Controller = {
                 modalidad: mesa.modalidad,
                 icono: iconCloud.secure_url,
                 explicacion: mesa.explicacion,
-                codigo: mesa.codigo
+                codigo: mesa.codigo,
+                tarjeta: mesa.tarjeta,
+                banco: mesa.banco,
             }
 
             evento.mesaDeRegalos.push(nuevaMesa);
