@@ -265,19 +265,11 @@ var EventoSchema = Schema({
         }
     }],
     vestimenta: {
-        iconoHombre: {
+        codigo: {
             type: String,
             required: false
         },
-        iconoMujer: {
-            type: String,
-            required: false
-        },
-        hombre: {
-            type: String,
-            required: false
-        },
-        mujer: {
+        mensaje: {
             type: String,
             required: false
         }
@@ -379,9 +371,19 @@ var EventoSchema = Schema({
             type: String,
             required: false
         },
-        letrasVestimenta: {
-            type: String,
-            required: false
+        estilosVestimenta: {
+            fondo:{
+                type: String,
+                required: false
+            },
+            color:{
+                type: String,
+                required: false
+            }, 
+            modo:{
+                type: String,
+                required: false
+            }
         },
         estilosInvitacion:{
             fondo:{
