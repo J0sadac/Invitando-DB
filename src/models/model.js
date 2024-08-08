@@ -355,6 +355,10 @@ var EventoSchema = Schema({
             type: String,
             required: false
         },
+        colorMesa:{
+            type: String,
+            required: false
+        },
         colorPadres:{
             type: String,
             required: false
