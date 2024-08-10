@@ -221,6 +221,10 @@ var EventoSchema = Schema({
             type: String,
             require: false
         },
+        sears: {
+            type: String,
+            require: false
+        },
         explicacion: {
             type: String,
             require: false
