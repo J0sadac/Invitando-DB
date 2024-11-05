@@ -465,7 +465,18 @@ var EventoSchema = Schema({
             type: Boolean,
             required: false
         }
+    },
+    frase3: {
+        img:{
+            type: String,
+            required: false
+        },
+        frase:{
+            type: String,
+            required: false
+        }
     }
+
 });
 
 module.exports = mongoose.model('eventos', EventoSchema);
