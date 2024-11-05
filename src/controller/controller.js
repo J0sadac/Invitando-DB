@@ -772,7 +772,7 @@ var Controller = {
 
             evento.frase3 = {
                 img: iconCloud.secure_url,
-                color: estilos.color
+                color: frase3.color
             }
 
             await evento.save();
