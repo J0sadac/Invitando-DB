@@ -331,6 +331,30 @@ var EventoSchema = Schema({
         }
     }],
     estilos:{
+        fontMain:{
+            type: String,
+            required: false
+        },
+        fontMainSize:{
+            type: String,
+            required: false
+        },
+        fontSecond:{
+            type: String,
+            required: false
+        },
+        tituloSecondSize:{
+            type: String,
+            required: false
+        },
+        fontMessage:{
+            type: String,
+            required: false
+        },
+        fontMessageSize:{
+            type: String,
+            required: false
+        },
         tituloPortada:{
             type: String,
             required: false
