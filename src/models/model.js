@@ -161,7 +161,7 @@ var EventoSchema = Schema({
                 }
             }
         },
-        timeLine:{
+        timeLine:[{
             url: {
                 type: String,
                 required: false
@@ -174,7 +174,7 @@ var EventoSchema = Schema({
                 type: String,
                 require: false
             }
-        },
+        }],
         cancion: {
             url: {
                 type: String,

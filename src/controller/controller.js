@@ -789,17 +789,18 @@ var Controller = {
     },
     nuevaTimeLine: async function(req, res){
         const eventoId = req.params.id;
-        const timeLine = req.body;
 
         try{
             const iconCloud = await Cloud.uploader.upload(req.file.path);
             const evento = await Evento.findById(eventoId);
 
-            evento.multimedia.timeLine = {
+             const line = {
                 url: iconCloud.secure_url,
                 public_id: iconCloud.public_id,
                 frase: timeLine.frase
             }
+
+            evento.multimedia.timeLine.push(line)
 
             await evento.save();
 
