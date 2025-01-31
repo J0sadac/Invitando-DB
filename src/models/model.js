@@ -161,6 +161,20 @@ var EventoSchema = Schema({
                 }
             }
         },
+        timeLine:{
+            url: {
+                type: String,
+                required: false
+            },
+            frase: {
+                type: String,
+                required: false
+            },
+            public_id: {
+                type: String,
+                require: false
+            }
+        },
         cancion: {
             url: {
                 type: String,
@@ -499,17 +513,7 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    },
-    timeLine:[{
-        imagen: {
-            type: String,
-            required: false
-        },
-        frase: {
-            type: String,
-            required: false
-        },
-    }]
+    }
 
 });
 
