@@ -789,6 +789,7 @@ var Controller = {
     },
     nuevaTimeLine: async function(req, res){
         const eventoId = req.params.id;
+        const time = req.body;
 
         try{
             const iconCloud = await Cloud.uploader.upload(req.file.path);
@@ -797,7 +798,7 @@ var Controller = {
              const line = {
                 url: iconCloud.secure_url,
                 public_id: iconCloud.public_id,
-                frase: timeLine.frase
+                frase: time.frase
             }
 
             evento.multimedia.timeLine.push(line)
