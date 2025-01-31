@@ -97,7 +97,7 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    }],
+    }], // mover padrinos a la seccion de datos
     multimedia: {
         carousel: [{
             url: {
@@ -241,11 +241,11 @@ var EventoSchema = Schema({
             type: String,
             require: false
         }
-    }],
+    }], //mover a seccion de datos
     frases: [{
         type: String,
         require: false
-    }],
+    }], //tambien
     itinerario: [{
         accion: {
             type: String,
@@ -267,7 +267,7 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    }],
+    }], // igual itinerario
     vestimenta: {
         codigo: {
             type: String,
@@ -277,7 +277,7 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    },
+    }, //igual
     ubicacion: [{
         salon: {
             type: String,
@@ -299,7 +299,7 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    }],
+    }], //iguaaaal
     invitados: [{
         mesa: {
             type: Number,
@@ -499,7 +499,17 @@ var EventoSchema = Schema({
             type: String,
             required: false
         }
-    }
+    },
+    timeLine:[{
+        imagen: {
+            type: String,
+            required: false
+        },
+        frase: {
+            type: String,
+            required: false
+        },
+    }]
 
 });
 
