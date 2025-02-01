@@ -254,6 +254,10 @@ var EventoSchema = Schema({
         banco: {
             type: String,
             require: false
+        },
+        destinatario: {
+            type: String,
+            require: false
         }
     }], //mover a seccion de datos
     frases: [{
