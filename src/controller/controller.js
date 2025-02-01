@@ -614,6 +614,7 @@ var Controller = {
                 codigo: mesa.codigo,
                 tarjeta: mesa.tarjeta,
                 banco: mesa.banco,
+                destinatario: mesa.destinatario
             }
 
             evento.mesaDeRegalos.push(nuevaMesa);
