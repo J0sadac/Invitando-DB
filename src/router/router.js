@@ -36,6 +36,7 @@ router.post('/evento/:id/padres', EventoController.nuevosPadres);
 router.post('/evento/:id/estilos/galeria', EventoController.nuevosEstilosGaleria);
 router.post('/evento/:id/estilos/invitacion', EventoController.nuevosEstilosInvitacion);
 router.post('/evento/:id/estilos/vestimenta', EventoController.nuevosEstilosVestimenta);
+router.post('/evento/:id/estilos/timeLine', EventoController.nuevosEstilosTimeLine);
 router.post('/evento/:id/frase/3', EventoController.nuevaFraseTres);
 router.post('/evento/:id/timeline', EventoController.nuevaTimeLine);
 

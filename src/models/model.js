@@ -445,6 +445,16 @@ var EventoSchema = Schema({
                 required: false
             }
         },
+        estilosTimeLine:{
+            fondo:{
+                type: String,
+                required: false
+            },
+            color:{
+                type: String,
+                required: false
+            }
+        },
         estilosGaleria:{
             fondo:{
                 type: String,
