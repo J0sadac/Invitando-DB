@@ -4,7 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const path = require('path');
+const AWS = require("aws-sdk");
+const multerS3 = require("multer-s3");
 
 var app = express();
 
@@ -27,13 +28,29 @@ app.use(cors({
     origin: white_list
 }));
 
-const storage = multer.diskStorage({
-    destination: path.join(__dirname, 'public/uploads'),
-    filename: (req, file, cb) => {
-        cb(null, new Date().getTime() + path.extname(file.originalname));
-    } 
+// Configurar AWS S3
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_PUBLIC_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+    region: process.env.AWS_BUCKET_REGION
 });
-app.use(multer({storage}).single('file'));
+
+// Configurar Multer con S3
+const upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: process.env.AWS_BUCKET_NAME,
+        acl: "public-read",
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        key: function (req, file, cb) {
+            cb(null, `/uploads/${Date.now()}_${file.originalname}`);
+        }
+    })
+});
+
+// Middleware para subir imágenes
+app.use(upload.single("file"));
+
 
 //rutas
 app.use('/', router);

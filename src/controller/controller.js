@@ -3,16 +3,9 @@
 const Evento = require('../models/model');
 const fs = require('fs-extra');
 const dotenv = require('dotenv');
+const AWS = require("aws-sdk");
 
 dotenv.config();
-
-const cloudinary = require('cloudinary');
-cloudinary.config({
-    cloud_name: process.env.NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-});
-const Cloud = cloudinary.v2;
 
 var Controller = {
 
@@ -472,28 +465,26 @@ var Controller = {
             })
         }
     },
-    nuevoFondo: async function(req, res){
+    nuevoFondo: async function(req, res) {
         const eventoId = req.params.id;
-        
-        try{
-            const imagenCloud = await Cloud.uploader.upload(req.file.path);
-            
-            const evento = await Evento.findById(eventoId);
 
-            evento.multimedia.fondo = {
-                url: imagenCloud.secure_url,
-                public_id: imagenCloud.public_id
-            };
+        try {
+            if (!req.file) {
+                return res.status(400).send({ message: "No se subió ninguna imagen" });
+            }
+
+            // Obtener la URL de la imagen subida a S3
+            const imageUrl = req.file.location;
+
+            // Buscar evento en la BD y actualizar la imagen de fondo
+            const evento = await Evento.findById(eventoId);
+            evento.multimedia.fondo = { url: imageUrl };
 
             await evento.save();
 
-            await fs.unlink(req.file.path);
-
-            res.status(200).send({evento});
-        }catch(err){
-            res.status(500).send({
-                meesage: "No se a subido la imagen"
-            })
+            res.status(200).send({ evento });
+        } catch (err) {
+            res.status(500).send({ message: "No se pudo subir la imagen" });
         }
     },
     nuevaPortada: async function(req, res){
