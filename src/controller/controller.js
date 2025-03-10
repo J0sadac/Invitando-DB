@@ -444,18 +444,19 @@ var Controller = {
         const eventoId = req.params.id;
         
         try{
-            const imagenCloud = await Cloud.uploader.upload(req.file.path);
-            
+            if (!req.file) {
+                return res.status(400).send({ message: "No se subió ninguna imagen" });
+            }
+
+            // Obtener la URL de la imagen subida a S3
+            const imageUrl = req.file.location;
+
+            // Buscar evento en la BD y actualizar la imagen de fondo
             const evento = await Evento.findById(eventoId);
 
-            evento.multimedia.fondos.tercero = {
-                url: imagenCloud.secure_url,
-                public_id: imagenCloud.public_id
-            };
+            evento.multimedia.fondos.tercero = { url: imageUrl};
 
             await evento.save();
-
-            await fs.unlink(req.file.path);
 
             res.status(200).send({evento});
         }catch(err){
