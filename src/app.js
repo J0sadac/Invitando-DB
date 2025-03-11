@@ -28,30 +28,6 @@ app.use(cors({
     origin: white_list
 }));
 
-// Configurar AWS S3
-const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
-});
-
-
-// Configurar Multer con S3
-const upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: process.env.AWS_BUCKET_NAME,
-        acl: "public-read",
-        contentType: multerS3.AUTO_CONTENT_TYPE,
-        key: function (req, file, cb) {
-            cb(null, `uploads/${Date.now()}_${file.originalname}`);
-        }
-    })
-});
-
-// Middleware para subir imágenes
-app.use(upload.single("file"));
-
 
 //rutas
 app.use('/', router);

@@ -1,9 +1,12 @@
 'use strict'
 
+import {uploadfile} from '../s3'
+
 const Evento = require('../models/model');
 const fs = require('fs-extra');
 const dotenv = require('dotenv');
 const AWS = require("aws-sdk");
+
 
 dotenv.config();
 
@@ -444,21 +447,9 @@ var Controller = {
         const eventoId = req.params.id;
         
         try{
-            if (!req.file) {
-                return res.status(400).send({ message: "No se subió ninguna imagen" });
-            }
+            await uploadfile(req.files.file)
 
-            // Obtener la URL de la imagen subida a S3
-            const imageUrl = req.file.location;
-
-            // Buscar evento en la BD y actualizar la imagen de fondo
-            const evento = await Evento.findById(eventoId);
-
-            evento.multimedia.fondos.tercero = { url: imageUrl};
-
-            await evento.save();
-
-            res.status(200).send({evento});
+            
         }catch(err){
             res.status(500).send({
                 meesage: "No se a subido la imagen",
