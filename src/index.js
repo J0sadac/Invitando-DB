@@ -1,18 +1,33 @@
-'use strict'
+import express from 'express'
+import fileUpload from 'express-fileupload';
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const app = require('./app');
-const port = 3500;
+import {UpLoadFile, GetFiles, GetFile, GetFileURL} from './s3.js';
 
-dotenv.config();
+const app = express();
 
-const mongoDb_URI = process.env.MONGODB_URI;
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './upload'
+}));
 
-mongoose.Promise = global.Promise;
-mongoose.connect(mongoDb_URI)
-    .then(() => {
-        app.listen(port);
+app.get('/files', async (req, res) => {
+    const result = await GetFiles();
 
-        console.log("Conexion a la base de datos con exito");
-    }).catch(err => console.log(err));
+    res.json(result.Contents)
+});
+
+app.get('/files/:fileName', async (req, res) => {
+    const result = await GetFileURL(req.params.fileName);
+    res.json({
+        url: result
+    })
+});
+
+app.post('/files', async (req, res) => {
+    await UpLoadFile(req.files.file);
+    res.json({message: 'Archivo cargado correctamente'});
+});
+
+app.listen(3000);
+
+console.log(`Server ejecutado el puerto ${3000}`);
