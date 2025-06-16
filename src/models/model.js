@@ -1,9 +1,8 @@
 'use strict'
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-var EventoSchema = Schema({
+var EventoSchema = new mongoose.Schema({
     evento: {
         type: String,
         required: false
@@ -531,4 +530,5 @@ var EventoSchema = Schema({
 
 });
 
-module.exports = mongoose.model('eventos', EventoSchema);
+const Evento = mongoose.model('eventos', EventoSchema);
+export default Evento;
