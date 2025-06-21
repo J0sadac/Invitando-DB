@@ -352,15 +352,7 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
-        fontMainSize:{
-            type: String,
-            required: false
-        },
         fontSecond:{
-            type: String,
-            required: false
-        },
-        tituloSecondSize:{
             type: String,
             required: false
         },
@@ -372,7 +364,19 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
-        fontDateSize: {
+        fontDateSize:{
+            type: String,
+            required: false
+        },
+        alturaPortada:{
+            type: String,
+            required: false
+        },
+        tituloSecondSize:{
+            type: String,
+            required: false
+        },
+        fontMainSize:{
             type: String,
             required: false
         },
@@ -412,11 +416,11 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
-        colorConfirmacion: {
+        colorConfirmacion:{
             type: String,
             required: false
         },
-        modo: {
+        modo:{
             type: String,
             required: false
         },
