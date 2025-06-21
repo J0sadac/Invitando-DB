@@ -372,6 +372,10 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
+        fontDateSize: {
+            type: String,
+            required: false
+        },
         tituloPortada:{
             type: String,
             required: false
