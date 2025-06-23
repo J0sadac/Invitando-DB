@@ -129,25 +129,26 @@ const Controller = {
             })
         }
   },
-  xv: async function(req, res){
-    try{
-      const eventXV = await Evento.find({evento: 'XV Años'})
-      .select('datos.festejado datos.fecha multimedia.preportada')
+  ejemplos: async function(req, res){
+    const clase = req.params.clase;
 
-      res.json(eventXV);
-    }catch(err){
-      res.status(500).json({ message: 'Error al obtener eventos de XV años' });
-    }
-  },
-  boda: async function(req, res){
-    try{
-      const eventBoda = await Evento.find({evento: 'Boda'})
-      .select('datos.festejado datos.fecha multimedia.preportada');
-
-      res.josn(eventBoda);
-    }catch(err){
-      res.status(500).json({message: 'Error al obtener los eventos de boda'});
+    const tipos = {
+      xv: 'XV Años',
+      boda: 'Boda'
     };
+
+    const claseEvento = tipos[clase.toLowerCase()];
+
+    try{
+      const eventos = await Evento.find({evento: claseEvento})
+      .select('datos.festejado datos.fecha datos.dia multimedia.preportada');
+
+      res.json(eventos);
+
+    }catch(err){
+      res.status(500).json({message: 'No pudimos obtener la lista de eventos por el siguiente error:', err})
+    }
+
   },
   imgCarousel: async (req, res) => {
     const eventoId = req.params.id;

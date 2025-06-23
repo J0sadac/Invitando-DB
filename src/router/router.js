@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/eventos', Controller.home);
 router.get('/evento/:id', Controller.evento);
 router.get('/evento/:eventoId/invitado/:invitadoId', Controller.invitado);
-router.get('/eventos/xv', Controller.xv);
+router.get('/eventos/:clase', Controller.ejemplos);
 
 router.post('/evento/:id/invitado', Controller.nuevoInvitado);
 router.post('/evento/:id/carousel', Controller.imgCarousel);
