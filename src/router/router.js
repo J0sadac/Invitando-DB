@@ -9,13 +9,14 @@ const router = express.Router();
 router.get('/eventos', Controller.home);
 router.get('/evento/:id', Controller.evento);
 router.get('/evento/:eventoId/invitado/:invitadoId', Controller.invitado);
+router.get('/eventos/xv', Controller.xv);
+
+router.post('/evento/:id/invitado', Controller.nuevoInvitado);
+router.post('/evento/:id/carousel', Controller.imgCarousel);
 
 router.put('/evento/:eventoId/invitado/:invitadoId/editar', Controller.editarInvitado);
 
 router.delete('/evento/:eventoId/invitado/:invitadoId', Controller.eliminarInvitado);
-
-router.post('/evento/:id/invitado', Controller.nuevoInvitado);
-router.post('/evento/:id/carousel', Controller.imgCarousel);
 
 export default router;
 

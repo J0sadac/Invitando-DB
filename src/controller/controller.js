@@ -1,9 +1,10 @@
 // ./controller/controller.js
 import { S3Client, PutObjectCommand, ListObjectsCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { AWS_ACCES_KEY_ID, AWS_BUCKET_NAME, AWS_REGION, AWS_SECRET_ACCES_KEY } from '../config.js';
-import Evento from '../models/model.js';
 import fs from 'fs';
 import fsExtra from 'fs-extra';
+
+import Evento from '../models/model.js';
 
 const client = new S3Client({
   region: AWS_REGION,
@@ -127,6 +128,26 @@ const Controller = {
                 message: "No pudimos obtener la invitacion que buscas"
             })
         }
+  },
+  xv: async function(req, res){
+    try{
+      const eventXV = await Evento.find({evento: 'XV Años'})
+      .select('datos.festejado datos.fecha multimedia.preportada')
+
+      res.json(eventXV);
+    }catch(err){
+      res.status(500).json({ message: 'Error al obtener eventos de XV años' });
+    }
+  },
+  boda: async function(req, res){
+    try{
+      const eventBoda = await Evento.find({evento: 'Boda'})
+      .select('datos.festejado datos.fecha multimedia.preportada');
+
+      res.josn(eventBoda);
+    }catch(err){
+      res.status(500).json({message: 'Error al obtener los eventos de boda'});
+    };
   },
   imgCarousel: async (req, res) => {
     const eventoId = req.params.id;
