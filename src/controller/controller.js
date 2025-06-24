@@ -141,14 +141,45 @@ const Controller = {
 
     try{
       const eventos = await Evento.find({evento: claseEvento})
-      .select('datos.festejado datos.fecha datos.dia multimedia.preportada');
+      .select('datos.festejado datos.fecha datos.dia multimedia.preportada invitados');
 
-      res.json(eventos);
+      const filtro = eventos.filter(evento => {
+        const festejado = evento.datos?.festejado;
+        const fecha = evento.datos?.fecha;
+        const dia = evento.datos?.dia;
+        const preportada = evento.multimedia?.preportada?.[0]?.url;
+        const invitado = evento.invitados?.[0];
+
+        return (
+          festejado &&
+          fecha &&
+          dia &&
+          preportada &&
+          invitado &&
+          invitado._id &&
+          invitado.invitado
+        );
+      });
+
+      const filtrado = filtro.map(evento => {
+        const invitado = evento.invitados?.[0];
+
+        return{
+          id: evento._id,
+          datos: evento.datos,
+          multimedia: evento.multimedia,
+          invitado: invitado._id
+        };
+      });
+
+      res.json(filtrado);
 
     }catch(err){
-      res.status(500).json({message: 'No pudimos obtener la lista de eventos por el siguiente error:', err})
-    }
-
+      res.status(500).json({
+        message: 'No pudimos obtener la lista de eventos por el siguiente error:',
+        error: err
+      });
+    };
   },
   imgCarousel: async (req, res) => {
     const eventoId = req.params.id;
