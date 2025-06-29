@@ -181,44 +181,68 @@ const Controller = {
       });
     };
   },
-  imgCarousel: async (req, res) => {
-    const eventoId = req.params.id;
+  subirImagen: async (req, res, options) => {
+    const eventoID = req.params.id;
+    const {seccion, multiples = false} = options;
 
-    try {
-      const file = req.files.file;
+    try{
+      const files = multiples ? req.files.files : [req.files.file];
+      const evento = await Evento.findById(eventoID);
+      const imagenes = [];
 
-      const stream = fs.createReadStream(file.tempFilePath);
+      if(!evento) return res.status(404).json({
+        message: 'Evento no encontrado.'
+      });
 
-      const uploadParams = {
-        Bucket: AWS_BUCKET_NAME,
-        Key: file.name, // Asegúrate de que no se repita si subes varias veces
-        Body: stream,
-        ContentType: file.mimetype
+      for (const file of files) {
+        const stream = fs.createReadStream(file.tempFilePath);
+
+        const uploadParams = {
+          Bucket: AWS_BUCKET_NAME,
+          Key: file.name,
+          Body: stream,
+          ContentType: file.mimetype
+        };
+
+        const command = new PutObjectCommand(uploadParams);
+
+        await client.send(command);
+
+        const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
+        const imagen = {
+          url: imgUrl,
+          public_id: file.name
+        };
+
+        imagenes.push(imagen);
+        await fsExtra.unlink(file.tempFilePath);
       };
 
-      const command = new PutObjectCommand(uploadParams);
-      await client.send(command);
+      const keys = seccion.split('.');
 
-      const imageUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
+      let current = evento;
 
-      const evento = await Evento.findById(eventoId);
-
-      const imagen = {
-        url: imageUrl,
-        key: file.name
+      for (let i = 0; i < keys.length - 1; i++) {
+        current = current[keys[i]];
       };
 
-      evento.multimedia.carousel.push(imagen);
+      const targetKey = keys[keys.length - 1];
+
+      if (Array.isArray(current[targetKey])) {
+        current[targetKey].push(...imagenes);
+      } else {
+        current[targetKey] = multiples ? imagenes : imagenes[0];
+      };
+
       await evento.save();
 
-      const imagenes = evento.multimedia.carousel;
+      res.status(200).json(imagenes);
 
-      await fsExtra.unlink(file.tempFilePath);
-
-      res.status(200).json({ imagenes });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al subir el archivo' });
+    }catch(err){
+      console.error(err);
+      res.status(500).json({
+        message: 'Hay un error al intentar subir las imagenes.'
+      })
     }
   }
 };

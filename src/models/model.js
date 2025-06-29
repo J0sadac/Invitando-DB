@@ -535,7 +535,6 @@ var EventoSchema = new mongoose.Schema({
             required: false
         }
     }
-
 });
 
 const Evento = mongoose.model('eventos', EventoSchema);
