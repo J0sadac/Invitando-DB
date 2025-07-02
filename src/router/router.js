@@ -12,7 +12,6 @@ router.get('/evento/:eventoId/invitado/:invitadoId', Controller.invitado);
 router.get('/eventos/:clase', Controller.ejemplos);
 
 router.post('/evento/:id/invitado', Controller.nuevoInvitado);
-router.post('/evento/:id/carousel', Controller.imgCarousel);
 router.post('/evento/:id/portada', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.portada', multiples: false });
 });
