@@ -11,7 +11,8 @@ const app = express();
 const white_list = [
     'http://localhost:3500',
     'http://localhost:3000',
-    'https://invitandoo.com'
+    'https://invitandoo.com',
+    'http://192.168.100.34:3000'
 ];
 
 app.use(cors({
