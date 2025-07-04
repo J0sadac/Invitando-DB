@@ -526,7 +526,7 @@ var EventoSchema = new mongoose.Schema({
         }
     },
     pensamiento: {
-        img: {
+        imagen: {
             url: String,
             public_id: String
         },
