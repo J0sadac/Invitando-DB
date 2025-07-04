@@ -244,7 +244,54 @@ const Controller = {
         message: 'Hay un error al intentar subir las imagenes.'
       })
     }
+  },
+  subirDatos: async (req, res, options) => {
+    try {
+      //Reutiliza la funcion subirImagen.
+      const imagenes = await new Promise((resolve, reject) => {
+        Controller.subirImagen(
+          { ...req, files: req.files },
+          { status: () => ({ json: resolve }) },
+          options
+        );
+      });
+
+      const eventoID = req.params.id;
+      const evento = await Evento.findById(eventoID);
+      if (!evento) return res.status(404).json({ message: 'Evento no encontrado.' });
+
+      //Accede a la sección de destino.
+      const keys = options.datosSeccion.split('.');
+      let current = evento;
+      for (let i = 0; i < keys.length - 1; i++) {
+        current = current[keys[i]];
+      }
+
+      const targetKey = keys[keys.length - 1];
+
+      const datos = {
+        ...req.body,
+        imagen: options.multiples ? imagenes : imagenes[0]
+      };
+
+      // Siempre se empuja el objeto a un array
+      current[targetKey] = datos;
+
+      await evento.save();
+
+      res.status(200).json({
+        mensaje: 'Datos subidos correctamente.',
+        datos
+      });
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({
+        message: 'Error al subir los datos.'
+      });
+    }
   }
+
 };
 
 export default Controller;

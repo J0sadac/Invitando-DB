@@ -525,10 +525,10 @@ var EventoSchema = new mongoose.Schema({
             required: false
         }
     },
-    frase3: {
-        img:{
-            type: String,
-            required: false
+    pensamiento: {
+        img: {
+            url: String,
+            public_id: String
         },
         frase:{
             type: String,
