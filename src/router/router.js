@@ -27,6 +27,12 @@ router.post('/evento/:id/galeria', (req, res) => {
 router.post('/evento/:id/fondo/primero', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.primero', multiples: false });
 });
+router.post('/evento/:id/fondo/segundo', (req, res) => {
+  Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.segundo', multiples: false });
+});
+router.post('/evento/:id/fondo/tercero', (req, res) => {
+  Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.tercero', multiples: false });
+});
 //Post para subir datos
 router.post('/evento/:id/pensamiento', (req, res) => {
   Controller.subirDatos(req, res, {
