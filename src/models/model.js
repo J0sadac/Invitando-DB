@@ -326,6 +326,10 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
+        titulo: {
+            type: String,
+            require: false
+        },
         pase: {
             type: Number,
             required: false
