@@ -58,16 +58,6 @@ var EventoSchema = new mongoose.Schema({
                 //temporal
             }
         },
-        padrinos: [{
-            padrino: {
-                type: String,
-                required: false
-            },
-            de: {
-                type: String,
-                required: false
-            }
-        }],
         dia: {
             type: String,
             require: false
@@ -477,45 +467,7 @@ var EventoSchema = new mongoose.Schema({
             }
         }
     },
-    mensajeUno:{
-        icono:{
-            url: {
-                type: String,
-                require: false
-            },
-            public_id: {
-                type: String,
-                require: false
-            }  
-        },
-        adorno:{
-            url: {
-                type: String,
-                require: false
-            },
-            public_id: {
-                type: String,
-                require: false
-            }
-        },
-        mensaje:{
-            type: String,
-            require: false
-        },
-        alineamiento:{
-            type: String,
-            require: false 
-        },
-        color:{
-            type: String,
-            require: false
-        }
-    },
     confirmaciones:{
-        mensajeUno:{
-            type: Boolean,
-            required: false
-        },
         frases:{
             type: Boolean,
             required: false
@@ -535,10 +487,13 @@ var EventoSchema = new mongoose.Schema({
             public_id: String
         },
         frase:{
-            type: String,
-            required: false
+            String            
         }
+    },
+    sugerencia: {
+        String
     }
+
 });
 
 const Evento = mongoose.model('eventos', EventoSchema);
