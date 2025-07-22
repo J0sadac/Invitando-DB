@@ -109,7 +109,23 @@ const Controller = {
             })
         }
   },
-  invitado: async function(req, res){
+  obtenerInvitados: async function(req, res){
+    var eventoId = req.params.eventoId;
+    
+    try{
+      const evento = await Evento.findById(eventoId).exec();
+      const lista = evento.invitados;
+
+      return res.status(200).send(lista);
+      
+    }catch(err){
+      console.log(err);
+      return res.status(500).send({
+        message: 'No se obtuvo la lista de invitados'
+      })
+    }
+  },
+  invitacion: async function(req, res){
         var eventoId= req.params.eventoId;
         var invitadoId = req.params.invitadoId;
 

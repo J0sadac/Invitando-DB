@@ -9,8 +9,9 @@ const router = express.Router();
 //Rutas get
 router.get('/eventos', Controller.home);
 router.get('/evento/:id', Controller.evento);
-router.get('/evento/:eventoId/invitado/:invitadoId', Controller.invitado);
+router.get('/evento/:eventoId/invitado/:invitadoId', Controller.invitacion);
 router.get('/eventos/:clase', Controller.ejemplos);
+router.get('/invitados/:eventoId', Controller.obtenerInvitados);
 
 //Rutas post
 router.post('/evento/:id/invitado', Controller.nuevoInvitado);
