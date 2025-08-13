@@ -63,29 +63,31 @@ const Controller = {
             });
         }
   },
-  editarInvitado: async function(req, res){
-        var eventoId = req.params.eventoId;
-        var invitadoId = req.params.invitadoId;
-        var actualizacion = req.body;
+  editarInvitado: async function(req, res) {
+    const { eventoId, invitadoId } = req.params;
+    const actualizacion = req.body;
 
-        try{
-            const evento = await Evento.findById(eventoId);
-            const invitado = evento.invitados.find(invitado => invitado._id == invitadoId);
-
-            Object.assign(invitado, actualizacion);
-            await evento.save();
-
-            const invitacion = {
-                ...evento.toObject(),
-                invitados:invitado
-            }
-
-            return res.status(200).send({invitacion});
-        }catch(err){
-            return res.status(500).send({
-                message: "No poudimos actualizar el invitado"
-            });
+    try{
+        const evento = await Evento.findById(eventoId);
+        if (!evento) {
+            return res.status(404).send({ message: "Evento no encontrado" });
         }
+
+        const invitado = evento.invitados.find(inv => inv._id.toString() === invitadoId);
+        if (!invitado) {
+            return res.status(404).send({ message: "Invitado no encontrado" });
+        }
+
+        Object.assign(invitado, actualizacion);
+        await evento.save();
+
+        return res.status(200).send({ invitado, evento });
+    }catch(err) {
+        console.error(err);
+        return res.status(500).send({
+            message: "No pudimos actualizar el invitado"
+        });
+    }
   },
   eliminarInvitado: async function(req, res){
         const eventoId = req.params.eventoId;
