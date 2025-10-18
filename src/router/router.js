@@ -35,13 +35,24 @@ router.post('/evento/:id/fondo/tercero', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.tercero', multiples: false });
 });
 router.post('/evento/:id/fondo/invitacion', (req, res) => {
-  Controller.subirImagen(req, res, { seccion: 'estilos.estilosInvitacion.fondo', multiples: false });
+  Controller.subirImagen(req, res, {  
+    propiedad: 'fondo', 
+    multiples: false,
+    datosSeccion: 'estilos.estilosInvitacion'
+  });
 });
 //Post para subir datos
 router.post('/evento/:id/pensamiento', (req, res) => {
   Controller.subirDatos(req, res, {
-    seccion: 'pensamiento.img',
+    propiedad: 'img',
     datosSeccion: 'pensamiento',
+    multiples: false
+  });
+});
+router.post('/evento/:id/ubicacion', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'foto',
+    datosSeccion: 'ubicacion',
     multiples: false
   });
 });
