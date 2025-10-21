@@ -313,8 +313,12 @@ const Controller = {
         [propiedad]: multiples ? imagenes : imagenes[0][propiedad],
       };
 
-      current[targetKey] = datos;
-
+      if (Array.isArray(current[targetKey])) {
+        current[targetKey].push(datos);
+      } else {
+        current[targetKey] = [datos];
+      }
+      
       await evento.save();
 
       res.status(200).json({
