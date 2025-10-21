@@ -35,12 +35,16 @@ router.post('/evento/:id/fondo/tercero', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.tercero', multiples: false });
 });
 router.post('/evento/:id/fondo/invitacion', (req, res) => {
-  Controller.subirImagen(req, res, {  
+  Controller.subirDatos(req, res, {  
     propiedad: 'fondo', 
     multiples: false,
     datosSeccion: 'estilos.estilosInvitacion'
   });
 });
+router.post('/evento/:id/cancion', (req, res) => {
+  Controller.subirImagen(req, res, { seccion: 'multimedia.cancion', multiples: false });
+});
+
 //Post para subir datos
 router.post('/evento/:id/pensamiento', (req, res) => {
   Controller.subirDatos(req, res, {
@@ -53,6 +57,13 @@ router.post('/evento/:id/ubicacion', (req, res) => {
   Controller.subirDatos(req, res, {
     propiedad: 'foto',
     datosSeccion: 'ubicacion',
+    multiples: false
+  });
+});
+router.post('/evento/:id/recomendacion', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'foto',
+    datosSeccion: 'datos.recomendiacion',
     multiples: false
   });
 });

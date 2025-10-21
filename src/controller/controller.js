@@ -200,72 +200,70 @@ const Controller = {
     };
   },
   subirImagen: async (req, res, options) => {
-  const eventoID = req.params.id;
-  const { seccion, multiples = false } = options;
+    const eventoID = req.params.id;
+    const { seccion, multiples = false } = options;
 
-  try {
-    // ✅ Asegura que siempre sea un array iterable
-    const files = multiples
-      ? (Array.isArray(req.files?.files) ? req.files.files : [req.files?.files])
-      : [req.files?.file];
+    try {
+        const files = multiples
+          ? (Array.isArray(req.files?.files) ? req.files.files : [req.files?.files])
+          : [req.files?.file];
 
-    const evento = await Evento.findById(eventoID);
-    const imagenes = [];
+        const evento = await Evento.findById(eventoID);
+        const imagenes = [];
 
-    if (!evento)
-      return res.status(404).json({
-        message: "Evento no encontrado.",
-      });
+        if (!evento)
+          return res.status(404).json({
+            message: "Evento no encontrado.",
+          });
 
-    for (const file of files) {
-      if (!file) continue; // evita errores si viene vacío
+        for (const file of files) {
+          if (!file) continue;
 
-      const stream = fs.createReadStream(file.tempFilePath);
+          const stream = fs.createReadStream(file.tempFilePath);
 
-      const uploadParams = {
-        Bucket: AWS_BUCKET_NAME,
-        Key: file.name,
-        Body: stream,
-        ContentType: file.mimetype,
-      };
+          const uploadParams = {
+            Bucket: AWS_BUCKET_NAME,
+            Key: file.name,
+            Body: stream,
+            ContentType: file.mimetype,
+          };
 
-      const command = new PutObjectCommand(uploadParams);
-      await client.send(command);
+          const command = new PutObjectCommand(uploadParams);
+          await client.send(command);
 
-      const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
-      const imagen = {
-        url: imgUrl,
-        public_id: file.name,
-      };
+          const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
+          const imagen = {
+            url: imgUrl,
+            public_id: file.name,
+          };
 
-      imagenes.push(imagen);
-      await fsExtra.unlink(file.tempFilePath);
-    }
+          imagenes.push(imagen);
+          await fsExtra.unlink(file.tempFilePath);
+        }
 
-    // Acceso dinámico a la sección
-    const keys = seccion.split(".");
-    let current = evento;
-    for (let i = 0; i < keys.length - 1; i++) {
-      current = current[keys[i]];
-    }
+        const keys = seccion.split(".");
+        let current = evento;
+        for (let i = 0; i < keys.length - 1; i++) {
+          current = current[keys[i]];
+        }
 
-    const targetKey = keys[keys.length - 1];
+        const targetKey = keys[keys.length - 1];
 
-    if (Array.isArray(current[targetKey])) {
-      current[targetKey].push(...imagenes);
-    } else {
-      current[targetKey] = multiples ? imagenes : imagenes[0];
-    }
+        if (Array.isArray(current[targetKey])) {
+          current[targetKey].push(...imagenes);
+        } else {
+          current[targetKey] = multiples ? imagenes : imagenes[0];
+        }
 
-    await evento.save();
+        await evento.save();
 
-    res.status(200).json(imagenes);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      message: "Hay un error al intentar subir las imágenes.",
-    });
-  }
+        res.status(200).json(imagenes);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({
+          message: "Hay un error al intentar subir las imágenes.",
+        });
+      }
   },
   subirDatos: async (req, res, options) => {
     const eventoID = req.params.id;
@@ -276,7 +274,6 @@ const Controller = {
       if (!evento)
         return res.status(404).json({ message: "Evento no encontrado." });
 
-      // ----- Subir imágenes -----
       const files = multiples ? req.files.files : [req.files.file];
       const imagenes = [];
 
@@ -295,16 +292,14 @@ const Controller = {
 
         const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
 
-        // Aquí cambia dinámicamente la propiedad según lo que se haya definido
         const imagenObj = {};
-        imagenObj[propiedad] = imgUrl; // ← puede ser icono, fondo, url o imagen
+        imagenObj[propiedad] = imgUrl; 
 
         imagenes.push(imagenObj);
 
         await fsExtra.unlink(file.tempFilePath);
       }
 
-      // ----- Insertar los datos en la sección indicada -----
       const keys = datosSeccion.split(".");
       let current = evento;
       for (let i = 0; i < keys.length - 1; i++) {

@@ -71,6 +71,29 @@ var EventoSchema = new mongoose.Schema({
                 type: String,
                 require: false
             }
+        },
+        recomendacion:{
+            foto:{
+                String
+            },
+            direccion:{
+                String
+            },
+            telefono:{
+                String
+            },
+            link:{
+                String
+            },
+            nombre:{
+                String
+            },
+            de:{
+                String
+            },
+            perfil:{
+                String
+            }
         }
     },
     padrinos: [{
