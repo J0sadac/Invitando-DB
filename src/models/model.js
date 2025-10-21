@@ -72,7 +72,7 @@ var EventoSchema = new mongoose.Schema({
                 require: false
             }
         },
-        recomendacion:{
+        recomendacion:[{
             foto:{
                 String
             },
@@ -94,7 +94,7 @@ var EventoSchema = new mongoose.Schema({
             perfil:{
                 String
             }
-        }
+        }]
     },
     padrinos: [{
         padrino: [{
