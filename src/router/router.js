@@ -63,7 +63,7 @@ router.post('/evento/:id/ubicacion', (req, res) => {
 router.post('/evento/:id/recomendacion', (req, res) => {
   Controller.subirDatos(req, res, {
     propiedad: 'foto',
-    datosSeccion: 'datos.recomendiacion',
+    datosSeccion: 'datos.recomendacion',
     multiples: false
   });
 });
