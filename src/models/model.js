@@ -501,6 +501,11 @@ var EventoSchema = new mongoose.Schema({
     },
     sugerencia: {
         String
+    },
+    hashtag: {
+        codigo:{type: String},
+        hashtag:{type: String},
+        perfil:{type: String}
     }
 
 });

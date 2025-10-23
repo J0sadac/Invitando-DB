@@ -67,6 +67,13 @@ router.post('/evento/:id/recomendacion', (req, res) => {
     multiples: false
   });
 });
+router.post('/evento/:id/hastag', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'codigo',
+    datosSeccion: 'hashtag',
+    multiples: false
+  });
+});
 
 //Rutas put
 router.put('/evento/:eventoId/invitado/:invitadoId/editar', Controller.editarInvitado);
