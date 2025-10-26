@@ -313,7 +313,6 @@ const Controller = {
         [propiedad]: multiples ? imagenes : imagenes[0][propiedad],
       };
 
-      // Si es un array, se hace push; si es objeto, se reemplaza directamente
       if (Array.isArray(current[targetKey])) {
         current[targetKey].push(datos);
       } else if (typeof current[targetKey] === 'object') {

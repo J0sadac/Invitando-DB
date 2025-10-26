@@ -488,6 +488,9 @@ var EventoSchema = new mongoose.Schema({
         condiciones:{
             type: Boolean,
             required: false
+        },
+        mesa:{
+            type: Boolean
         }
     },
     pensamiento: {
