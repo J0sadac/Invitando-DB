@@ -498,17 +498,19 @@ var EventoSchema = new mongoose.Schema({
             url: String,
             public_id: String
         },
-        frase:{
-            String            
-        }
+        frase: String            
     },
-    sugerencia: {
+    sugerencia: 
         String
-    },
+    ,
     hashtag: {
         codigo:{type: String},
         hashtag:{type: String},
         perfil:{type: String}
+    },
+    capitulo:{
+        verso: String,
+        texto: String
     }
 
 });

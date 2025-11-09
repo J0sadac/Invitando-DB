@@ -334,6 +334,86 @@ const Controller = {
         .status(500)
         .json({ message: "Error al subir los datos o las imágenes." });
     }
+  },
+  subirDatosRobustos: async (req, res, options) => {
+    const eventoID = req.params.id;
+    const { datosSeccion, multiples = false, propiedad = "imagen" } = options;
+
+    try {
+      const evento = await Evento.findById(eventoID);
+      if (!evento)
+        return res.status(404).json({ message: "Evento no encontrado." });
+
+      const files = multiples
+        ? (Array.isArray(req.files?.files) ? req.files.files : [req.files?.files])
+        : [req.files?.file];
+
+      const imagenes = [];
+
+      for (const file of files) {
+        if (!file) continue;
+
+        const stream = fs.createReadStream(file.tempFilePath);
+        const uploadParams = {
+          Bucket: AWS_BUCKET_NAME,
+          Key: file.name,
+          Body: stream,
+          ContentType: file.mimetype,
+        };
+
+        const command = new PutObjectCommand(uploadParams);
+        await client.send(command);
+
+        const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
+
+        // ✅ Guardar la estructura correcta según la propiedad
+        const imagenObj = {
+          url: imgUrl,
+          public_id: file.name,
+        };
+
+        imagenes.push(imagenObj);
+        await fsExtra.unlink(file.tempFilePath);
+      }
+
+      // Accede a la sección destino
+      const keys = datosSeccion.split(".");
+      let current = evento;
+      for (let i = 0; i < keys.length - 1; i++) {
+        current = current[keys[i]];
+      }
+
+      const targetKey = keys[keys.length - 1];
+
+      // ✅ Combina datos de texto + imagen correctamente
+      const datos = {
+        ...req.body,
+      };
+
+      if (imagenes.length > 0) {
+        datos[propiedad] = multiples ? imagenes : imagenes[0];
+      }
+
+      if (Array.isArray(current[targetKey])) {
+        current[targetKey].push(datos);
+      } else if (typeof current[targetKey] === "object") {
+        current[targetKey] = { ...current[targetKey], ...datos };
+      } else {
+        current[targetKey] = datos;
+      }
+
+      await evento.save();
+
+      res.status(200).json({
+        mensaje: "Datos subidos correctamente.",
+        datos,
+      });
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ message: "Error al subir los datos o las imágenes." });
+    }
   }
 
 };

@@ -47,8 +47,8 @@ router.post('/evento/:id/cancion', (req, res) => {
 
 //Post para subir datos
 router.post('/evento/:id/pensamiento', (req, res) => {
-  Controller.subirDatos(req, res, {
-    propiedad: 'img',
+  Controller.subirDatosRobustos(req, res, {
+    propiedad: 'imagen',
     datosSeccion: 'pensamiento',
     multiples: false
   });
@@ -67,10 +67,24 @@ router.post('/evento/:id/recomendacion', (req, res) => {
     multiples: false
   });
 });
-router.post('/evento/:id/hastag', (req, res) => {
+router.post('/evento/:id/hashtag', (req, res) => {
   Controller.subirDatos(req, res, {
     propiedad: 'codigo',
     datosSeccion: 'hashtag',
+    multiples: false
+  });
+});
+router.post('/evento/:id/padrinos', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'icono',
+    datosSeccion: 'padrinos',
+    multiples: false
+  });
+});
+router.post('/evento/:id/estilos/invitacion', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'fondo',
+    datosSeccion: 'estilos.estilosInvitacion',
     multiples: false
   });
 });
