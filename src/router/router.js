@@ -88,6 +88,37 @@ router.post('/evento/:id/estilos/invitacion', (req, res) => {
     multiples: false
   });
 });
+router.post('/evento/:id/itinerario', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'icono',
+    datosSeccion: 'itinerario',
+    multiples: false
+  });
+});
+router.post('/evento/:id/capitulo', (req, res) => {
+  Controller.subirTexto(req, res, {datosSeccion: 'capitulo'});
+});
+router.post('/evento/:id/sobre/solapa', (req, res) => {
+  Controller.subirImagen(req, res, {
+    propiedad: 'solapa',
+    datosSeccion: 'sobre',
+    multiples: false
+  });
+});
+router.post('/evento/:id/sobre/cuerpo', (req, res) => {
+  Controller.subirImagen(req, res, {
+    propiedad: 'cuerpo',
+    datosSeccion: 'sobre',
+    multiples: false
+  });
+});
+router.post('/evento/:id/sobre/sello', (req, res) => {
+  Controller.subirImagen(req, res, {
+    propiedad: 'sello',
+    datosSeccion: 'sobre',
+    multiples: false
+  });
+});
 
 //Rutas put
 router.put('/evento/:eventoId/invitado/:invitadoId/editar', Controller.editarInvitado);

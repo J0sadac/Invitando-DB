@@ -414,7 +414,26 @@ const Controller = {
         .status(500)
         .json({ message: "Error al subir los datos o las imágenes." });
     }
+  },
+  subirTexto: async (req, res, options) => {
+    const eventoID = req.params.id;
+    const { datosSeccion } = options;
+
+    try {
+      const evento = await Evento.findById(eventoID);
+      if (!evento)
+        return res.status(404).json({ message: "Evento no encontrado." });
+
+      evento[datosSeccion] = req.body;
+      await evento.save();
+
+      res.status(200).json({ message: "Datos guardados correctamente.", evento });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error al guardar los datos.", error });
+    }
   }
+
 
 };
 

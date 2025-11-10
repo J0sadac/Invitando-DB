@@ -511,6 +511,11 @@ var EventoSchema = new mongoose.Schema({
     capitulo:{
         verso: String,
         texto: String
+    },
+    sobre:{
+        solapa: String,
+        cuerpo: String,
+        sello: String
     }
 
 });
