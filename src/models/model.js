@@ -513,9 +513,9 @@ var EventoSchema = new mongoose.Schema({
         texto: String
     },
     sobre:{
-        solapa: String,
-        cuerpo: String,
-        sello: String
+        solapa: {type: String},
+        cuerpo: {type: String},
+        sello: {type: String}
     }
 
 });
