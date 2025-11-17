@@ -99,21 +99,21 @@ router.post('/evento/:id/capitulo', (req, res) => {
   Controller.subirTexto(req, res, {datosSeccion: 'capitulo'});
 });
 router.post('/evento/:id/sobre/solapa', (req, res) => {
-  Controller.subirImagen(req, res, {
+  Controller.subirDatos(req, res, {
     propiedad: 'solapa',
     datosSeccion: 'sobre',
     multiples: false
   });
 });
 router.post('/evento/:id/sobre/cuerpo', (req, res) => {
-  Controller.subirImagen(req, res, {
+  Controller.subirDatos(req, res, {
     propiedad: 'cuerpo',
     datosSeccion: 'sobre',
     multiples: false
   });
 });
 router.post('/evento/:id/sobre/sello', (req, res) => {
-  Controller.subirImagen(req, res, {
+  Controller.subirDatos(req, res, {
     propiedad: 'sello',
     datosSeccion: 'sobre',
     multiples: false
