@@ -36,6 +36,118 @@ const Controller = {
             });
         }
   },
+  crearEvento: async (req, res) => {
+    try {
+      const { evento, modelo} = req.body;
+
+      let preportada = [];
+
+      if (req?.files?.file) {
+        const file = req.files.file;
+        const stream = fs.createReadStream(file.tempFilePath);
+
+        const uploadParams = {
+          Bucket: AWS_BUCKET_NAME,
+          Key: file.name,
+          Body: stream,
+          ContentType: file.mimetype,
+        };
+
+        const command = new PutObjectCommand(uploadParams);
+        await client.send(command);
+
+        const imgUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${file.name}`;
+
+        preportada.push({
+          url: imgUrl,
+          public_id: file.name
+        });
+
+        await fsExtra.unlink(file.tempFilePath);
+      }
+
+      const nuevoEvento = new Evento({
+        evento: evento || "",
+        modelo: modelo || 3,
+
+        datos: {
+          festejado: req.body.festejado || "",
+          fecha: req.body.fecha || "",
+          dia: req.body.dia || ""
+        },
+        multimedia: {
+          preportada,
+        },
+
+        vestimenta: {
+          codigo: "Formal",
+          mensaje: ""
+        },
+
+        estilos: {
+          fontMain: "",
+          fontSecond: "",
+          fontMessage: "",
+          fontMessageSize: "",
+          fontDateSize: "",
+          alturaPortada: "",
+          tituloSecondSize: "",
+          fontMainSize: "",
+          tituloPortada: "",
+          contenidoPortada: "",
+          alineamientoMensaje: "",
+          letraMensaje: "",
+          letraPase: "",
+          letraUbicacion: "",
+          colorPadit: "",
+          colorMesa: "",
+          colorPadres: "",
+          colorConfirmacion: "",
+          modo: "",
+          contenidoPadres: "",
+          estilosVestimenta: {
+            fondo: "",
+            color: "",
+            modo: ""
+          },
+          estilosInvitacion: {
+            fondo: "",
+            color: ""
+          },
+          estilosTimeLine: {
+            fondo: "",
+            color: ""
+          },
+          estilosGaleria: {
+            fondo: "",
+            color: ""
+          }
+        },
+
+        confirmaciones: {
+          frases: false,
+          lluvia: false,
+          condiciones: false,
+          mesa: true
+        },
+      });
+
+      await nuevoEvento.save();
+
+      res.status(200).json({
+        ok: true,
+        message: "Evento creado correctamente",
+        evento: nuevoEvento
+      });
+
+    } catch (error) {
+      console.error("Error al crear evento:", error);
+      res.status(500).json({
+        ok: false,
+        message: "Error en el servidor"
+      });
+    }
+  },
   nuevoInvitado: async function(req, res){
         var eventoId = req.params.id;
         var datos = req.body

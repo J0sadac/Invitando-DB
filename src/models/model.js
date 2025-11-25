@@ -474,6 +474,10 @@ var EventoSchema = new mongoose.Schema({
                 type: String,
                 required: false
             }
+        },
+        distanciaSello:{
+            type: String,
+            required: false
         }
     },
     confirmaciones:{

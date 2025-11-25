@@ -14,6 +14,7 @@ router.get('/eventos/:clase', Controller.ejemplos);
 router.get('/invitados/:eventoId', Controller.obtenerInvitados);
 
 //Rutas post
+router.post('/crear/evento', Controller.crearEvento);
 router.post('/evento/:id/invitado', Controller.nuevoInvitado);
 //Post para subir imagenes
 router.post('/evento/:id/portada', (req, res) => {
