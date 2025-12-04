@@ -520,8 +520,14 @@ var EventoSchema = new mongoose.Schema({
         solapa: {type: String},
         cuerpo: {type: String},
         sello: {type: String}
+    },
+    pensamientoDos: {
+        imagen: {
+            url: String,
+            public_id: String
+        },
+        frase: String            
     }
-
 });
 
 const Evento = mongoose.model('eventos', EventoSchema);

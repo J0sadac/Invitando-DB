@@ -24,7 +24,7 @@ router.post('/evento/:id/preportada', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.preportada', multiples: false });
 });
 router.post('/evento/:id/galeria', (req, res) => {
-  Controller.subirImagen(req, res, { seccion: 'multimedia.carousel', multiples: true });
+  Controller.subirImagen(req, res, { seccion: 'multimedia.carousel', multiples: false });
 });
 router.post('/evento/:id/fondo/primero', (req, res) => {
   Controller.subirImagen(req, res, { seccion: 'multimedia.fondos.primero', multiples: false });
@@ -58,6 +58,13 @@ router.post('/evento/:id/ubicacion', (req, res) => {
   Controller.subirDatos(req, res, {
     propiedad: 'foto',
     datosSeccion: 'ubicacion',
+    multiples: false
+  });
+});
+router.post('/evento/:id/mesa', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'icono',
+    datosSeccion: 'mesaDeRegalos',
     multiples: false
   });
 });
@@ -120,6 +127,21 @@ router.post('/evento/:id/sobre/sello', (req, res) => {
     multiples: false
   });
 });
+router.post('/evento/:id/mesa', (req, res) => {
+  Controller.subirDatos(req, res, {
+    propiedad: 'icono',
+    datosSeccion: 'mesaDeRegalos',
+    multiples: false
+  });
+});
+router.post('/evento/:id/pensamiento/dos', (req, res) => {
+  Controller.subirDatosRobustos(req, res, {
+    propiedad: 'imagen',
+    datosSeccion: 'pensamientoDos',
+    multiples: false
+  });
+});
+
 
 //Rutas put
 router.put('/evento/:eventoId/invitado/:invitadoId/editar', Controller.editarInvitado);
