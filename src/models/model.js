@@ -348,6 +348,10 @@ var EventoSchema = new mongoose.Schema({
         de: {
             type: String,
             required: false
+        },
+        llego: {
+            type: Boolean,
+            require: false
         }
     }],
     estilos:{
@@ -372,6 +376,14 @@ var EventoSchema = new mongoose.Schema({
             required: false
         },
         alturaPortada:{
+            type: String,
+            required: false
+        },
+        alturaPensamiento:{
+            type: String,
+            required: false
+        },
+        colorFecha:{
             type: String,
             required: false
         },
