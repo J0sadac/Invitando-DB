@@ -387,6 +387,10 @@ var EventoSchema = new mongoose.Schema({
             type: String,
             required: false
         },
+        fontPortada:{
+            type: String,
+            required: false
+        },
         tituloSecondSize:{
             type: String,
             required: false
